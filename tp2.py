@@ -200,6 +200,7 @@ def pendulum(var, time, l_0, k, m, g):
 solutions = integrate.odeint(pendulum, var, time, args=(l_0, k, m, g))
 
 # Affichage premier graphique
+# Résultat : https://github.com/LeMinaw/TP2/raw/master/pendulum_vars.png
 fig, ax_1 = plt.subplots()
 ax_2 = ax_1.twinx()
 plt.title("Évolution des variables")
@@ -216,6 +217,7 @@ plt.show()
 plt.close()
 
 # Affichage second graphique
+# Résultat : https://github.com/LeMinaw/TP2/raw/master/pendulum_traject.png
 l = solutions[:, 0]
 theta = solutions[:, 2]
 
