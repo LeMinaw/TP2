@@ -3,7 +3,8 @@
 import numpy as np
 import numpy.linalg as la
 import matplotlib.pyplot as plt
-from math import pi, sin, cos
+from scipy import integrate, optimize
+from math import pi, sin, cos, inf
 
 def __EXO__(number):
     print(f"\n{12*'='} EXO N°{number} {12*'='}\n")
@@ -58,10 +59,8 @@ __EXO__(2.1)
 x_step = .1
 x = np.arange(0, pi/2, x_step)
 
-vsin = np.vectorize(sin)
-vcos = np.vectorize(cos)
-sin_x = vsin(x)
-cos_x = vcos(x)
+sin_x = np.sin(x)
+cos_x = np.cos(x)
 
 sin_x_deriv = []
 for i in range(1, len(x)-1):
@@ -117,11 +116,8 @@ x_samples = 1000
 x_step = (x_max - x_min) / x_samples
 x = np.arange(x_min, x_max, x_step)
 
-vsin = np.vectorize(sin)
-vcos = np.vectorize(cos)
-
-plt.plot(x, vsin(x), label="sin(x)")
-plt.plot(x, vcos(x), label="cos(x)")
+plt.plot(x, np.sin(x), label="sin(x)")
+plt.plot(x, np.cos(x), label="cos(x)")
 plt.title("Fonctions trigo")
 plt.xlabel("θ")
 plt.legend()
@@ -132,17 +128,12 @@ plt.close()
 
 __EXO__(2.5)
 
-from scipy import integrate
-from math import inf
-
-integ_1 = integrate.quad(lambda x: 1+x**2, 0, 3.5)[0]
+integ_1 = integrate.quad(lambda x: 1+x**2, 1, 3.5)[0]
 integ_2 = integrate.quad(lambda x: np.exp(-x**2), 0, inf)[0]
 print(f"Première intégrale : {integ_1}, seconde intégrale : {integ_2}.")
 
 
 __EXO__(2.6)
-
-from scipy import optimize
 
 func = lambda x: (x+4) * (x+1) * (x-1) * (x-3)
 res = optimize.minimize_scalar(func, bracket=(-10**8, 10**8))
