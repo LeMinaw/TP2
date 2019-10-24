@@ -20,16 +20,16 @@ print(f"Passage par référence : {a}") # A est altéré par les modifications d
 a = np.array((0, 0))
 b = np.copy(a) # B est une copie de A (passage par assignement)
 b[0] = 1
-print(f"Passage par assignement : {a}") # A n'est altéré par les modifications de B
+print(f"Passage par assignement : {a}") # A n'est pas altéré par les modifications de B
 
 
 __EXO__(1.2)
 
 array = np.array((
     (1, 2, 3, 4),
-    (3, 4, 5, 6),
-    (7, 8, 9, 10),
-    (11, 12, 13, 14),
+    (5, 6, 7, 8),
+    (9, 10, 11, 12),
+    (13, 14, 15, 16),
 ))
 print(f"Seconde ligne :\n{array[1]}")
 print(f"Troisième colonne :\n{array[:,2]}")
@@ -69,6 +69,7 @@ for i in range(1, len(x)-1):
 
 delta = cos_x[1:-1] - sin_x_deriv
 
+print(f"Dérivées :\n{sin_x_deriv}")
 print(f"Erreurs sur l'estimtion numérique des dérivées :\n{delta}")
 # La précision dépend de x_step, puisque la dérivée est atteinte
 # à la limite du taux d'acroissement.
@@ -100,10 +101,10 @@ b = np.matrix((
     (1, -3),
     (-5, -7)
 ))
-a = a + np.transpose(a)
-b = b + np.transpose(b)
+a += np.transpose(a)
+b += np.transpose(b)
 
-c = a *b
+c = a * b
 print(f"Produit :\n{c}")
 print(f"Valeurs propres :\n{la.eigvals(c)}")
 
@@ -174,9 +175,11 @@ __EXO__(3)
 var = np.array((0, 0, 0.3, 0)) # l, l', θ, θ'
 time = np.linspace(0, 25, 1000)
 l_0 = 1
-k = 1.2
-m = .035
-g = 9.81
+
+# Valeurs arbitraires choisies pour essai :
+k = 1.2 # N/m
+m = .035 # kg
+g = 9.81 # m/s²
 
 def pendulum(var, time, l_0, k, m, g):
     l, d_l, theta, d_theta = var
